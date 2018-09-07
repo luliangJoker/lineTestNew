@@ -1,0 +1,54 @@
+.page-container{
+  position: absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background: #fff;
+}
+
+.page-container .edu{
+  position: relative;
+  margin-top: 1.52rem;
+}
+
+.edu .count{
+  font-size: .6rem;
+  position: absolute;
+  left: 50%;
+  top: 1.8rem;
+  color: #fff;
+  transform: translateX(-50%);
+}
+
+.edu img{
+  display: block;
+}
+
+.apply{
+  padding: .1rem .3rem 0;
+  height:0.9rem;
+}
+
+.btn-apply{
+  height: .8rem;
+  width: 100%;
+  background: #678FD4;
+  border-radius: .4rem;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 0.32rem;
+  float: left;
+}
+.tryRaise{
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.tryRaiseUrl{
+  color:#333;
+  font-size: .32rem;
+  font-family:PingFang-SC-Medium;
+  text-decoration:underline ;
+}

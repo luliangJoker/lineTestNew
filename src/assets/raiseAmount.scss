@@ -1,0 +1,112 @@
+.container{
+  padding: .3rem .2rem .2rem;
+  font-size: .3rem;
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background: #ededed;
+  margin-top: 1.44rem;
+}
+.info{
+  display: flex;
+  flex-direction:column;
+  background: #fff;
+  border-radius: .1rem;
+  padding: 0  .2rem;
+}
+.item-info{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  height:1rem;
+  border-bottom:1px dashed #CCCCCC ;
+  padding-left: .1rem;
+}
+.item-info:last-child{
+  border: 0;
+}
+.item-info label{
+  color: #333;
+  width: 2rem;
+  font-size: 0.28rem;
+}
+.item-info input{
+  margin: 0;
+  border: 0;
+  text-align: right;
+  color:#999;
+  /* width: 4.5rem; */
+  height:1rem;
+  font-size: 0.28rem;
+  outline:none;
+}
+.item-info .arr-right{
+  line-height: 1rem;
+  font-size: .32rem;
+  color: #333;
+}
+.area label{
+  width: 2.5rem;
+}
+.floor label{
+  width: 1.5rem;
+}
+.floor input{
+  width: 1.7rem;
+  text-align: center;
+}
+.mortgage-bank.disabled label{
+  color:#999;
+}
+.btn-calc{
+  margin-top: .4rem;
+  height: .8rem;
+  width: 100%;
+  background: #678FD4;
+  border-radius: .4rem;
+  color: #fff;
+  border:none;
+  outline:none;
+  font-size: 0.32rem;
+}
+/* .mui-switch{
+    width: .88rem;
+    height: .4rem;
+
+}
+.mui-switch .mui-switch-handle{
+    width: .34rem;
+    height: .34rem;
+}
+.mui-switch.mui-active .mui-switch-handle{
+    right:0 !important;
+    transition: all .3s;
+} */
+button[disabled], html input[disabled] {
+  background: #999;
+}
+.mui-switch.mui-active:before{content: '是';}
+.mui-switch:before{content: '否'; top: .14rem;}
+
+.item-info .mint-switch{
+  width: 0.84rem !important;
+}
+.mint-switch-core {
+  width: 0.84rem;
+  height: 0.44rem;
+}
+.mint-switch-core::before {
+  width: 0.8rem;
+  height: 0.4rem;
+  background-color: #fdfdfd;
+}
+.mint-switch-core::after {
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.mint-switch-input:checked + .mint-switch-core {
+  border-color: #00e266;
+  background-color: #00e266;
+}
