@@ -17,7 +17,8 @@ module.exports = {
         'vue': 'Vue',
         'vue-router': 'VueRouter',
         'element-ui': 'ELEMENT',
-        'mint-ui': 'MINT'
+        'mint-ui': 'MINT',
+        'BMap':'BMap'
     },
     // 调试
     // devtool: '#eval-source-map',

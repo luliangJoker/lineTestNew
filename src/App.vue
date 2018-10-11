@@ -1,6 +1,8 @@
 <template>
   	<div id="app">
-    	<router-view></router-view>
+		<!--<keep-alive>-->
+			<router-view></router-view>
+		<!--</keep-alive>-->
   	</div>
 </template>
 <script>
@@ -10,7 +12,12 @@
 	
 	export default {
 		created() {
-            this.$router.push('/testAmountResult')
+
+           // this.$router.push('/citySearch')
+           // this.$router.push('/InputInfo')
+           // this.$router.push('/testAmountResult')
+           // this.$router.push('/selectCom')
+           this.$router.push('/swiperHome')
         }
 	}
 </script>

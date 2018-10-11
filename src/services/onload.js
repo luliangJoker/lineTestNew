@@ -78,16 +78,16 @@ document.addEventListener(
 var statusBarHeight = 24;
 
 function getStatusBarHeight() {
-    window.bridge.callHandler('getTranslucentStatus', {}, function(response) {
-        if (typeof response == "string") {
-            response = JSON.parse(response)
-        }
-        if (response.supported == '1') {
-            statusBarHeight = parseInt(response.statusbar_height);
-            //更新状态栏高度
-
-        }
-    })
+    // window.bridge.callHandler('getTranslucentStatus', {}, function(response) {
+    //     if (typeof response == "string") {
+    //         response = JSON.parse(response)
+    //     }
+    //     if (response.supported == '1') {
+    //         statusBarHeight = parseInt(response.statusbar_height);
+    //         //更新状态栏高度
+    //
+    //     }
+    // })
 }
 
 console.log("call setupWebViewJavascriptBridge");

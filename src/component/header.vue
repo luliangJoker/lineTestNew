@@ -1,12 +1,12 @@
 <template>
     <div class="nav-header">
         <header v-bind:style="{paddingTop: statusBarHeight +'rem'}" class="header">
-				<span @click="close" class="goback">
-                    <i class="el-icon-arrow-left goback"></i> 
-                </span>
+				<!--<span @click="close" class="goback">-->
+                    <!--<i class="el-icon-arrow-left goback"></i>-->
+                <!--</span>-->
 				<div class="showCityPosition">
                      {{postTitle}}
-                     <div @click="getMap">
+                     <div v-if="showCityPosition" @click="getMap">
                            <i></i>
                            <input type="text" disabled="disabled" v-model="cityname">
                      </div> 
@@ -24,7 +24,28 @@
                 //showCity:""
             }
         },
-        props: ['postTitle',"showCityPosition"],
+        mounted(){
+            var v = this;
+
+            v.cityname= v.$store.state.city ;
+
+            // var currentCity='';
+            // var v=this;
+            // function getCurrentCity(result) {
+            //     currentCity = result.name;
+            //     console.log("当前定位城市:" + currentCity);
+            //     currentCity=currentCity.replace("市","");
+            //     v.cityname=currentCity;
+            //
+            //     localStorage.city = v.cityname;
+            //
+            //
+            // }
+            // var myCity = new BMap.LocalCity();
+            // myCity.get(getCurrentCity);
+            // console.log('不好意思，我先走一步' + currentCity);
+        },
+        props: ['postTitle',"showCityPosition","closeScreen"],
         created(){
         var v=this;
         var submitdata= JSON.parse(localStorage.getItem("submitdata"));
@@ -55,26 +76,24 @@
     },
         methods: {
             close() {
-                this.$router.go(-1);
+
+                let v = this
+
+                if (this.closeScreen) {
+
+                    console.log("关闭页面到APP")
+                    window.bridge.callHandler('didClose', {}, function (response) {
+                    })
+                } else {
+
+                    v.$router.to(-1);
+                }
             },
-            getMap(){
-            var v=this;
-            window.bridge.callHandler('selectCity', {}, function(response) {
-                 console.log(response);
-                 if (typeof response == "string"){
-                    response = JSON.parse(response)
-                }
-                window.bridge.callHandler('getCity', {}, function(response) {
-                 console.log(response);
-                 if (typeof response == "string"){
-                    response = JSON.parse(response)
-                }
-                    v.city=response.citycode;
-                    v.cityname=response.cityname;
-                    this.$emit("getCity",city)
-                })
-            })
-        },
+            getMap() {
+
+                var v = this;
+                v.$router.push({path:'/citySearch',query:{routePath:this.$route.path}})
+            },
         }
     }
 </script>
@@ -135,12 +154,14 @@
           .showCityPosition>div{
              position: absolute;
              top: 0;
-             right:-2.88rem;
+             right: 0rem;
+             width: 1.5rem;
+             text-align: left;
         }
         .showCityPosition div i{
             display:inline-block;
             width:.5rem;
-            height: .35rem;
+            height: .39rem;
             background: url(../images/cityposition.png) no-repeat;
             background-position: .1rem .1rem;
         }

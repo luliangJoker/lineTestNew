@@ -1,16 +1,25 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from '../App.vue'
-import InputInfo from '../views/InputInfo.vue'
+import InputInfo from '../views/busMeasure/InputInfo.vue'
+import TestAmountResult from '../views/busMeasure/TestAmountResult.vue'
+
 import RaiseAmountResult from '../views/RaiseAmountResult.vue'
-import TestAmountResult from '../views/TestAmountResult.vue'
 import RaiseAmount from '../views/RaiseAmount.vue'
+import SendPhoneCode from '../views/SendPhoneCode.vue'  //SendPhonecodefail
+import SendPhonecodefail from '../views/SendPhonecodefail.vue'
+
+import selectCom from '../views/selectCom/selectCom.vue'
+
+import CitySearch from '../views/citySearch/CitySearch.vue'
+
+import swiperHome from '../views/Swiper.vue'
 
 Vue.use(VueRouter)
 
 const routers = [{
     path: '',
-    redirect: '/RaiseAmount'
+    redirect: '/InputInfo'
 },{
     path: '/InputInfo',
     component: InputInfo
@@ -23,6 +32,21 @@ const routers = [{
 }, {
     path: '/raiseAmount',
     component: RaiseAmount
+},{
+    path: '/sendPhonecode',
+    component: SendPhoneCode
+},{
+    path: '/sendPhonecodefail',
+    component: SendPhonecodefail
+},{
+    path: '/citySearch',
+    component: CitySearch
+},{
+    path: '/selectCom',
+    component: selectCom
+},{
+    path: '/swiperHome',
+    component: swiperHome
 }];
 
 const router = new VueRouter({

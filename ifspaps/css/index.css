@@ -1,7 +1,6 @@
 @charset "UTF-8";
 .container {
   padding: .3rem .2rem .2rem;
-  font-size: .3rem;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -14,6 +13,7 @@
   display: flex;
   flex-direction: column;
   background: #fff;
+  font-size: .3rem;
   border-radius: .1rem;
   padding: 0  .2rem; }
 
@@ -127,59 +127,15 @@ html {
 html, body, #app {
   min-height: 100%;
 }
-.page-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: #fff; }
-
-.page-container .edu {
-  position: relative;
-  margin-top: 1.52rem; }
-
-.edu .count {
-  font-size: .6rem;
-  position: absolute;
-  left: 50%;
-  top: 1.8rem;
-  color: #fff;
-  transform: translateX(-50%); }
-
-.edu img {
-  display: block; }
-
-.apply {
-  padding: .1rem .3rem 0;
-  height: 0.9rem; }
-
-.btn-apply {
-  height: .8rem;
-  width: 100%;
-  background: #678FD4;
-  border-radius: .4rem;
-  color: #fff;
-  border: none;
-  outline: none;
-  font-size: 0.32rem;
-  float: left; }
-
-.tryRaise {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center; }
-
-.tryRaiseUrl {
-  color: #333;
-  font-size: .32rem;
-  font-family: PingFang-SC-Medium;
-  text-decoration: underline; }
+/*.page-container{*/
+/*background: #fff !important;*/
+/*}*/
 .edcsbody {
   width: 7.1rem;
   margin: 1.8rem .2rem .4rem .2rem;
   background: #fff;
   position: relative;
+  border-radius: .1rem;
   /*text-align: center;*/ }
   .edcsbody .input-label {
     font-size: 0.28rem;
@@ -312,6 +268,57 @@ button[disabled], html input[disabled] {
 
 .el-icon-arrow-right {
   font-size: 0.32rem; }
+
+.page-container {
+  background: #ededed !important; }
+.page-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #fff; }
+
+.page-container .edu {
+  position: relative;
+  margin-top: 1.52rem; }
+
+.edu .count {
+  font-size: .6rem;
+  position: absolute;
+  left: 50%;
+  top: 1.8rem;
+  color: #fff;
+  transform: translateX(-50%); }
+
+.edu img {
+  display: block; }
+
+.apply {
+  padding: .1rem .3rem 0;
+  height: 0.9rem; }
+
+.btn-apply {
+  height: .8rem;
+  width: 100%;
+  background: #678FD4;
+  border-radius: .4rem;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 0.32rem;
+  float: left; }
+
+.tryRaise {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center; }
+
+.tryRaiseUrl {
+  color: #333;
+  font-size: .32rem;
+  font-family: PingFang-SC-Medium;
+  text-decoration: underline; }
 
 @charset "UTF-8";
 .header {
@@ -468,6 +475,13 @@ button[disabled], html input[disabled] {
   background: linear-gradient(0deg, #5c80bd, #5180bd);
   border: none;
 }
+
+
+
+
+
+
+
 
 
 

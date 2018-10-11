@@ -5,15 +5,15 @@
 
 export default {
     getHttp(request, tscode, body) {
-        window.bridge.callHandler(request, {
-            'transcode': tscode,
-            'body': body
-        }, function(response) {
-            if (typeof response == "string") {
-                response = JSON.parse(response)
-            }
-            return response
-        })
+        // window.bridge.callHandler(request, {
+        //     'transcode': tscode,
+        //     'body': body
+        // }, function(response) {
+        //     if (typeof response == "string") {
+        //         response = JSON.parse(response)
+        //     }
+        //     return response
+        // })
     },
     getCard() {
         return 15321132121351

@@ -1,15 +1,22 @@
 <template>
     <div class="container">
-        <top-title :postTitle="titleMessage" @getCity="getCity"></top-title>
+        <router-link to="/testAmountResult">
+            <div class="gobackIcon">
+                  <span class="goback">
+                    <i class="el-icon-arrow-left goback"></i>
+            </span>
+            </div>
+        </router-link>
+        <top-title :postTitle="titleMessage" :showCityPosition="showCity" @getCity="getCity"></top-title>
         <ul class="info">
             <li class="item-info">
                 <label for="block-name">小区名字</label>
-                <input type="text" id="block-name" placeholder="请选择" readonly v-model="block" @click="selectBlock">
+                <input type="text" id="block-name" placeholder="请选择" readonly v-model="this.$store.state.Comm_Nm" @click="selectBlock">
                 <i id="select-block" class="el-icon-arrow-right arr-right"></i>
             </li>
             <li class="item-info">
                 <label for="house-type">房屋类型</label>
-                <input type="text" id="house-type" placeholder="请选择" readonly  v-model="houseType" @click="selectHouseType">
+                <input type="text" id="house-type" placeholder="住宅" readonly  v-model="houseType" @click="selectHouseType">
                 <i id="select-type" class="el-icon-arrow-right arr-right"></i>
             </li>
             <li class="item-info area">
@@ -22,20 +29,23 @@
                 第<input type="text" id="nth-floor" placeholder="请输入" v-model="floor">层&nbsp;
                 共<input type="text" id="total-floor" placeholder="请输入" v-model="totalFloor">层
             </li>
+            <!--
             <li class="item-info">
                 <label>房产是否抵押</label>
-                <!--<div class="mui-switch" @click="toggleMortgage" >-->
-                    <!--<div class="mui-switch-handle"></div>-->
-                <!--</div>-->
                 <mt-switch v-model="isMortgage"></mt-switch>
             </li>
+            -->
+            <!--
             <li class="item-info mortgage-bank" :class="{ disabled : !isMortgage }" >
                 <label for="mortgage">抵押银行</label>
                 <input type="text" id="mortgage" placeholder="请选择" readonly v-model="bank" @click="selectBank">
                 <i id="select-bank" class="el-icon-arrow-right arr-right"></i>
             </li>
+            -->
         </ul>
-        <button v-bind:disabled="(!block || !houseType || !houseArea || !floor || !totalFloor ||(isMortgage&&!bank) )" class="btn-calc" @click="evaluate">测算</button>
+
+        <button v-bind:disabled="(!this.$store.state.Comm_Nm || !houseType || !houseArea || !floor || !totalFloor )" class="btn-calc" @click="evaluateCheck">测算</button>
+
         <picker-time @valuesid="valuesid" v-if="pickerShow" @add-parent-cancel="addCancel" @add-parent-confirm="addConfirm" :slotsData="pickerData"></picker-time>
     </div>
 </template>
@@ -49,6 +59,7 @@
         data() {
             return {
                 titleMessage: '试试能否提额',
+                showCity:true,
                 pickerShow: false,
                 pickerData:[],
                 pickerType:'',
@@ -69,9 +80,11 @@
                                {id:"12",name:"普通公寓"},
                                {id:"21",name:"写字楼"},
                                {id:"99",name:"别墅"},
-                               ]},
+                               ],
+                               defaultIndex:"0"
+                               },
                              ],
-                houseType:'',
+                houseType:'住宅',
                 houseArea:'',
                 floor:'',
                 city:'',
@@ -97,27 +110,27 @@
             var traceno=submitdata.body.traceno; //缓存中获取追踪流水号  20180828162956ZPPyUy
             v.traceno=traceno;
             if (window.bridge == undefined) {
-                setTimeout(function() {
-                    window.WebViewJavascriptBridge.callHandler("cityClick",{'name':'深圳','code':'001'}, function (response) {
-                        if (typeof response == "string") {
-                            response = JSON.parse(response)
-                        }
-                        console.log(response);
-                        v.city=response.citycode;
-                        console.log("获取城市")
-                        console.log(response);
-                    })
-                }, 500)
+                // setTimeout(function() {
+                //     window.bridge.callHandler('getCity', {}, function (response) {
+                //         if (typeof response == "string") {
+                //             response = JSON.parse(response)
+                //         }
+                //         console.log(response);
+                //         v.city=response.citycode;
+                //         console.log("获取城市")
+                //         console.log(response);
+                //     })
+                // }, 500)
             }else{
-                window.WebViewJavascriptBridge.callHandler('cityClick',{'name':'深圳','code':'001'}, function (response) {
-                    if (typeof response == "string") {
-                        response = JSON.parse(response)
-                    }
-                    console.log(response);
-                    v.city=response.citycode;
-                    console.log("获取城市")
-                    console.log(response);
-                })
+                // window.bridge.callHandler('getCity', {}, function (response) {
+                //     if (typeof response == "string") {
+                //         response = JSON.parse(response)
+                //     }
+                //     console.log(response);
+                //     v.city=response.citycode;
+                //     console.log("获取城市")
+                //     console.log(response);
+                // })
                 //v.responsecompany()//获取企业列表
             }
         },
@@ -155,25 +168,21 @@
             },
      
             selectBlock(){
-                let v = this;
-                this.pickerType='block'
-               // this.pickerShow=true;
-                this.pickerData=this.blockData;
-
-                /////////////获取小区
-                var params = {'title':'测试分享的标题','content':'测试分享的内容','url':'http://www.baidu.com'};
-
-                window.WebViewJavascriptBridge.callHandler('send', params, function(response) {
-
-                    // console.log(response);
-                    alert(response);
-
-                    if (typeof response == "string"){
-                        response = JSON.parse(response)
-                    }
-                    v.block=response.haname;
-                    v.hacode=response.hacode;
-                })
+                this.$router.push("/selectCom")
+               //  let v = this;
+               //  this.pickerType='block'
+               // // this.pickerShow=true;
+               //  this.pickerData=this.blockData;
+               //
+               //  /////////////获取小区
+               //  window.bridge.callHandler('chooseHouseArea', {}, function(response) {
+               //      console.log(response);
+               //      if (typeof response == "string"){
+               //          response = JSON.parse(response)
+               //      }
+               //      v.block=response.haname;
+               //      v.hacode=response.hacode;
+               //  })
             },
             selectHouseType(){
                 let v = this;
@@ -204,44 +213,94 @@
             changeSelectedValue(type){
                 var v = this;
             },
-            evaluate(){
-                //接口中的字段名称
-                var userData={
-                    city:"",//需要获取
-                    bldgarea:"",//建筑面积 e.g., ”88.88”
-                    proptype:"",//房屋类型
-                    hacode:"",  //小区编号 需要获取
-                    haname:"",  //小区名称
-                    floor:"",   //所在楼层
-                    height:"",  //总楼层
-                    traceno:"", //信用额度测算追踪流水号 从上页面获取
-                }
-                var output= {
-                    haname:this.block,//
-                    proptype:this.proptype,//
-                    bldgarea:this.houseArea,//
-                    floor:this.floor,//
-                    height:this.totalFloor,//
-                    city:this.city,   //
-                    traceno:this.traceno,//
-                    hacode:this.hacode,//
-                    //isMortgage:this.isMortgage, //是否抵押
-                    //bank:this.bank
-                };
-                console.log(output)
-                window.WebViewJavascriptBridge.callHandler('serverRequest', {'transcode': 'ucspss400016', 'body':output}, function(response) {
-                    if (typeof response == "string"){
-                        response = JSON.parse(response)
-                    }
-                     console.log(response)
-                if (response.header['resultcode'] == '000000') {
-                      localStorage.setItem("submitevaluatedata",JSON.stringify(response))
-                     // window.location.href="raiseAmountResult.html"
-                     this.$router.push("/raiseAmountResult")
+            evaluateCheck(){
+                var v=this;
+
+                if((v.floor) > parseInt(v.totalFloor)){
+                    console.log("所在楼层大于总楼层")
+                    alert('所在楼层大于总楼层')
+                    // window.bridge.callHandler('showOKDialog', {'title': '温馨提示', 'message':"所在楼层大于总楼层"}, function(response){})
                 }else{
-                    window.WebViewJavascriptBridge.callHandler('showOKDialog', {'title': '温馨提示', 'message':response.header['resultdesc']}, function(response){})
+                   v.evaluate()
                 }
-                });
+            },
+            evaluate(){
+
+                let v = this ;
+
+                let housueTypeNum
+
+                if (v.houseType == '住宅'){
+                    housueTypeNum = '11'
+                }else if(v.houseType == '公寓'){
+                    housueTypeNum = '12'
+                }
+                else if(v.houseType == '写字楼'){
+                    housueTypeNum = '21'
+                }
+                else{
+                    housueTypeNum = '99'
+                }
+
+                let data = {'Txn_Cd':'IFSPEsttCltlLmtMsr',
+                    'Bing_Urbn_ECD': v.$store.state.cityID, //所属城市编码
+                    'Hs_CnstrctArea': v.houseArea,  //建筑面积
+                    'Comm_Hs_Tp': housueTypeNum, //房屋类型
+                    'Comm_ID': v.$store.state.Comm_ID,  // 小区id
+                    'Comm_Nm': v.$store.state.Comm_Nm,  // 小区名字
+                    'Wbt_Floor': v.floor,  //所在楼层
+                    'Tot_Floor_Num':v.totalFloor, // 总楼层
+                    'Tpl_Vno':'1.0',
+                    'Txn_Chnl_ID':'400010',
+                    'Chnl_TpCd':'4000',
+                    'TermTp':'10'};
+
+                let head = {
+                    "APP_Key":"",
+                    "Rndm_Num":"",
+                    "APP_Token":"",
+                    "Eqmt_ID_No":"",
+                    "MAC_Adr":"",
+                    "IP_Adr":"",
+                    "Apl_Nm":"",
+                    "APP_VNo":"",
+                    "APP_Sgn":"",
+                    "Txn_ModDsc":"",
+                    "SDK_VNo":"",
+                    "SDK_Sgn":"",
+                    "API_VNo":"",
+                    "PD_VNo":"",
+                    "Sgn":"",
+                    " Rqs_Jrnl_No ":"",
+                    "Rqs_Dt":"",
+                    "Rqs_Tm":"",
+                    "Chnl_TpCd":"",
+                    "RcvPrt_AccNo":"",
+                    "Pyr_AccNo":"",
+                    "RcvPy_Amt":"",
+                    "Mrch_ID":"",
+                };
+
+                let allParams={};
+                allParams.Url = "IFSPEnqrUrbnDstcInf";
+                allParams.Head =head;
+                allParams.Data =data;
+
+
+                window.bridge.callHandler('send',allParams,function(response) {
+
+                    if(response.Data.resultdesc == '成功'){
+
+                        v.$router.push({path:'/raiseAmountResult',query:{housePrice:response.Data.CrLine}})
+
+                    }
+                    else{
+                        
+                        alert(response.Data.resultdesc);
+                    }
+
+
+                })
             }
         },
         watch:{
@@ -279,5 +338,21 @@
     }
 </script>
 <style scoped lang="scss">
+
+    .gobackIcon{
+        position: fixed;
+        /*width: 30px;*/
+        /*height: 30px;*/
+        /*background: red;*/
+        left: 0;
+        top: .7rem;
+        color:#fff;
+        z-index:99
+    }
+    .el-icon-arrow-left:before{
+        font-size: .50rem;
+    }
+
+
 
 </style>

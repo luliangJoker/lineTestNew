@@ -42,7 +42,7 @@
       }
     },
     created () {
-      this.slots = this.slotsData
+      this.slots = this.slotsData;
     }
   };
 </script>
